@@ -2,7 +2,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Striped Progress bar </h4>
+                <h4 class="card-title">Striped Progress bar</h4>
                 <div class="progress m-t-20">
                     <div class="progress-bar bg-primary progress-bar-striped active" style="height:5px;"
                         [style.width]="getProgress1" role="progressbar"> </div>
@@ -33,7 +33,8 @@
     <div class="col-6">
         <div class="card">
             <div class="card-body">
-                <app-incrimenter (value)="progress2 = $event" [value]="progress2"></app-incrimenter>
+                <app-incrimenter (value)="progress2 = $event" [value]="progress2" [btnClass]="'btn btn-info'">
+                </app-incrimenter>
             </div>
         </div>
     </div>
