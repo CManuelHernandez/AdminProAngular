@@ -5,15 +5,13 @@
                 <h4 class="card-title">Striped Progress bar </h4>
                 <div class="progress m-t-20">
                     <div class="progress-bar bg-primary progress-bar-striped active" style="height:5px;"
-                        role="progressbar"> </div>
+                        [style.width]="getProgress1" role="progressbar"> </div>
                 </div>
-                <!-- [style.width]="getPorcentaje" -->
 
                 <div class="progress m-t-20">
                     <div class="progress-bar bg-info progress-bar-striped active" style="height:5px;"
-                        role="progressbar"> </div>
+                        [style.width]="getProgress2" role="progressbar"> </div>
                 </div>
-                <!-- [style.width]="getPorcentaje" -->
 
             </div>
         </div>
@@ -25,7 +23,7 @@
         <div class="card">
             <div class="card-body">
 
-                <app-incrimenter></app-incrimenter>
+                <app-incrimenter (value)="progress1 = $event" [value]="progress1"></app-incrimenter>
 
             </div>
         </div>
@@ -35,7 +33,7 @@
     <div class="col-6">
         <div class="card">
             <div class="card-body">
-                <app-incrimenter></app-incrimenter>
+                <app-incrimenter (value)="progress2 = $event" [value]="progress2"></app-incrimenter>
             </div>
         </div>
     </div>
