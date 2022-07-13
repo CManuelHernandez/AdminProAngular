@@ -27,8 +27,8 @@ export class RxjsComponent implements OnDestroy {
   retornaIntervalo(): Observable<number> {
     return interval(100).pipe(
       map((valor) => valor + 1),
-      filter((valor) => (valor % 2 === 0 ? true : false))
-      //take(10)
+      filter((valor) => (valor % 2 === 0 ? true : false)),
+      take(10)
     );
   }
 
