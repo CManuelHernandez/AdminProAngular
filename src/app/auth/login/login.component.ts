@@ -39,7 +39,7 @@ export class LoginComponent implements AfterViewInit {
     google.accounts.id.initialize({
       client_id:
         '31828481885-pnjvk3h1cdogr7vte07dhvgnqk89dmsg.apps.googleusercontent.com',
-      callback: this.handleCredentialResponse,
+      callback: (response: any) => this.handleCredentialResponse(response),
     });
     google.accounts.id.renderButton(
       //document.getElementById('buttonDiv'),
@@ -48,7 +48,12 @@ export class LoginComponent implements AfterViewInit {
     );
   }
   handleCredentialResponse(response: any) {
-    console.log('Encoded JWT ID token: ' + response.credential);
+    // console.log('Encoded JWT ID token: ' + response.credential);
+    this.usuarioService.loginGoogle(response.credential).subscribe((resp) => {
+      // console.log({ login: resp });
+      // Navegar al Dashboard
+      this.router.navigateByUrl('/');
+    });
   }
 
   login() {
@@ -59,7 +64,11 @@ export class LoginComponent implements AfterViewInit {
         } else {
           localStorage.removeItem('email');
         }
+
+        // Navegar al Dashboard
+        this.router.navigateByUrl('/');
       },
+
       (err) => {
         // Si sucede un error
         Swal.fire('Error', err.error.msg, 'error');
