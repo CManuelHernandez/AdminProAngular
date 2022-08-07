@@ -7,6 +7,9 @@ import { environment } from 'src/environments/environment';
 import { RegisterForm } from '../interfaces/register-form.interface';
 import { LoginForm } from '../interfaces/login-form.interface';
 import { Observable, of } from 'rxjs';
+import { Router } from '@angular/router';
+
+declare const google: any;
 
 const base_url = environment.base_url;
 
@@ -14,7 +17,17 @@ const base_url = environment.base_url;
   providedIn: 'root',
 })
 export class UsuarioService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
+
+  googleInit() {}
+
+  logout() {
+    localStorage.removeItem('token');
+
+    google.accounts.id.revoke('email', () => {
+      this.router.navigateByUrl('/login');
+    });
+  }
 
   validarToken(): Observable<boolean> {
     const token = localStorage.getItem('token') || '';
