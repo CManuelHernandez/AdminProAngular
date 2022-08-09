@@ -8,6 +8,7 @@ import { RegisterForm } from '../interfaces/register-form.interface';
 import { LoginForm } from '../interfaces/login-form.interface';
 import { Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
+import { Usuario } from '../models/usuario.model';
 
 declare const google: any;
 
@@ -18,6 +19,8 @@ const base_url = environment.base_url;
 })
 export class UsuarioService {
   constructor(private http: HttpClient, private router: Router) {}
+
+  public usuario: Usuario;
 
   googleInit() {}
 
@@ -40,6 +43,8 @@ export class UsuarioService {
       })
       .pipe(
         tap((resp: any) => {
+          const { email, google, nombre, role, uid, img } = resp.usuario;
+          this.usuario = new Usuario(nombre, email, '', img, google, role, uid);
           localStorage.setItem('token', resp.token);
         }),
         map((resp) => true),
