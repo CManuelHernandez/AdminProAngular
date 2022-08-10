@@ -10,6 +10,7 @@ import { PagesComponent } from './pages.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { PromesasComponent } from './promesas/promesas.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
+import { PerfilComponent } from './perfil/perfil.component';
 
 const routes: Routes = [
   {
@@ -37,6 +38,11 @@ const routes: Routes = [
         path: 'promesas',
         component: PromesasComponent,
         data: { title: 'Promises' },
+      },
+      {
+        path: 'perfil',
+        component: PerfilComponent,
+        data: { title: 'Perfil de usuario' },
       },
       { path: 'rxjs', component: RxjsComponent, data: { title: 'RxJs' } },
     ],
