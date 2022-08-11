@@ -13,6 +13,7 @@ export class PerfilComponent implements OnInit {
   public perfilForm: FormGroup;
   public usuario: Usuario;
   public imagenSubir: File;
+  public imgTemp: any = null;
 
   constructor(
     private fb: FormBuilder,
@@ -42,10 +43,22 @@ export class PerfilComponent implements OnInit {
 
   cambiarImagen(file) {
     this.imagenSubir = file;
+
+    if (!file) {
+      return (this.imgTemp = null);
+    }
+
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+
+    reader.onloadend = () => {
+      this.imgTemp = reader.result;
+      console.log(reader.result);
+    };
   }
   subirImagen() {
     this.fileUploadService
       .actualizarFoto(this.imagenSubir, 'usuarios', this.usuario.uid)
-      .then((img) => console.log(img));
+      .then((img) => (this.usuario.img = img));
   }
 }
