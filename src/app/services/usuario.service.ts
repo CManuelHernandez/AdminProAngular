@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { Router } from '@angular/router';
 
 import { environment } from 'src/environments/environment';
 
 import { RegisterForm } from '../interfaces/register-form.interface';
 import { LoginForm } from '../interfaces/login-form.interface';
-import { Observable, of } from 'rxjs';
-import { Router } from '@angular/router';
+import { CargarUsuario } from '../interfaces/cargar-usuarios.interface';
+
 import { Usuario } from '../models/usuario.model';
 
 declare const google: any;
@@ -28,6 +30,14 @@ export class UsuarioService {
 
   get uid(): string {
     return this.usuario.uid || '';
+  }
+
+  get headers() {
+    return {
+      headers: {
+        'x-token': this.token,
+      },
+    };
   }
 
   googleInit() {}
@@ -94,5 +104,11 @@ export class UsuarioService {
         localStorage.setItem('token', resp.token);
       })
     );
+  }
+
+  cargarUsuarios(desde: number = 0) {
+    //http://localhost:3000/api/usuarios?desde=5
+    const url = `${base_url}/usuarios?desde=${desde}`;
+    return this.http.get<CargarUsuario>(url, this.headers);
   }
 }
