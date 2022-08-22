@@ -12,6 +12,7 @@ import { PromesasComponent } from './promesas/promesas.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { UsuariosComponent } from './mantenimientos/usuarios/usuarios.component';
+import { HospitalesComponent } from './mantenimientos/hospitales/hospitales.component';
 
 const routes: Routes = [
   {
@@ -50,7 +51,12 @@ const routes: Routes = [
       {
         path: 'usuarios',
         component: UsuariosComponent,
-        data: { title: 'Usuarios de aplicación' },
+        data: { title: 'Mantenimiento de Usuarios' },
+      },
+      {
+        path: 'hospitales',
+        component: HospitalesComponent,
+        data: { title: 'Mantenimiento de Hospitales' },
       },
     ],
   },
