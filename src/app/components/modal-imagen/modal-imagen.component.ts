@@ -7,11 +7,30 @@ import { ModalImagenService } from '../../services/modal-imagen.service';
   styles: [],
 })
 export class ModalImagenComponent implements OnInit {
+  public imagenSubir: File;
+  public imgTemp: any = null;
+
   constructor(public modalImagenService: ModalImagenService) {}
 
   ngOnInit(): void {}
 
   cerrarModal() {
+    this.imgTemp = null;
     this.modalImagenService.cerrarModal();
+  }
+
+  cambiarImagen(file) {
+    this.imagenSubir = file;
+
+    if (!file) {
+      return (this.imgTemp = null);
+    }
+
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+
+    reader.onloadend = () => {
+      this.imgTemp = reader.result;
+    };
   }
 }
