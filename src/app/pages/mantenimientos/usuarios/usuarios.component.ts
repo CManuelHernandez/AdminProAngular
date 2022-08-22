@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Usuario } from 'src/app/models/usuario.model';
-import { UsuarioService } from 'src/app/services/usuario.service';
-import { BusquedasService } from 'src/app/services/busquedas.service';
 import Swal from 'sweetalert2';
+
+import { Usuario } from 'src/app/models/usuario.model';
+
+import { BusquedasService } from 'src/app/services/busquedas.service';
+import { ModalImagenService } from 'src/app/services/modal-imagen.service';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-usuarios',
@@ -18,7 +21,8 @@ export class UsuariosComponent implements OnInit {
 
   constructor(
     private usuarioService: UsuarioService,
-    private busquedasService: BusquedasService
+    private busquedasService: BusquedasService,
+    private modalImagenService: ModalImagenService
   ) {}
 
   ngOnInit(): void {
@@ -84,5 +88,10 @@ export class UsuariosComponent implements OnInit {
     this.usuarioService.guardarUsuario(usuario).subscribe((resp) => {
       console.log(resp);
     });
+  }
+
+  abrirModal(usuario: Usuario) {
+    console.log(usuario);
+    this.modalImagenService.abrirModal();
   }
 }
